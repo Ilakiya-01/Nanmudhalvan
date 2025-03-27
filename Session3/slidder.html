@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        background-image: url("https://i.pinimg.com/originals/96/24/cf/9624cf1d20272cf4903e8ac23ae43188.jpg");
+        height: 100vh;
+        width: 100vw;
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all 0.5s ease-in-out;
+      }
+      #left,
+      #right {
+        background-color: rgb(226, 226, 226);
+      }
+      #left {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: rotate(180deg);
+        border-radius: 25px;
+      }
+      #right {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        border-radius: 25px;
+      }
+      .Mini-Img {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        opacity: 0.8;
+      }
+      .my-img {
+        transition: all 0.5s ease-in-out;
+      }
+
+      .my-img.active {
+        scale: 1.1;
+        box-shadow: 0px 3px 9px 0px;
+        position: relative;
+        z-index: 1;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="prev">
+        <img
+          onclick="prev()"
+          src="https://images4.alphacoders.com/139/thumb-1920-1390540.webp"
+          alt=""
+          height="35px"
+          width="35px"
+          id="left"
+        />
+        <img
+          onclick="next()"
+          src="https://images4.alphacoders.com/139/thumb-1920-1390540.webp"
+          alt=""
+          height="35px"
+          width="35px"
+          id="right"
+        />
+      </div>
+      <div class="Mini-Img">
+        <img
+          src="https://wallpaperaccess.com/full/37946.jpg"
+          alt=""
+          class="my-img"
+          height="50px"
+          width="100px"
+        />
+        <img
+          src="https://wallpaperaccess.com/full/37963.jpg"
+          alt=""
+          class="my-img"
+          height="50px"
+          width="100px"
+        />
+        <img
+          src="https://4kwallpapers.com/images/walls/thumbs_2t/21646.jpg"
+          alt=""
+          class="my-img"
+          height="50px"
+          width="100px"
+        />
+        <img
+          src="https://4kwallpapers.com/images/walls/thumbs_2t/21679.jpg"
+          alt=""
+          class="my-img"
+          height="50px"
+          width="100px"
+        />
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
