@@ -3,51 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Movie Gallery - Light Theme</title>
     <style>
-      /* universal selector */
       * {
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      header ul {
+
+      body {
+        background-color: #f9f9f9; /* light background */
+        font-family: "Arial", sans-serif;
+        color: #222;
+      }
+
+      header {
+        background-color: #fff;
+        padding: 20px 40px;
         display: flex;
-        justify-content: space-around;
-        background-color: antiquewhite;
-        padding: 10px;
-        list-style-type: none;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
+
+      header ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+      }
+
       header a {
         text-decoration: none;
-        color: black;
+        color: #444;
+        font-size: 18px;
+        font-weight: 600;
+        transition: color 0.3s ease;
       }
+
+      header a:hover {
+        color: #e50914; /* Netflix red accent */
+      }
+
+      main {
+        padding: 40px 30px;
+      }
+
+      h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        color: #111;
+      }
+
       .movies {
-        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding-bottom: 10px;
       }
-      .movies .cards {
-        border: 1px solid black;
-        height: 100 px;
-        width: 217px;
-        border-radius: 20px;
+
+      .movies::-webkit-scrollbar {
+        height: 10px;
       }
-      .movies img {
-        width: 50%;
+
+      .movies::-webkit-scrollbar-thumb {
+        background: #bbb;
+        border-radius: 10px;
+      }
+
+      .card {
+        flex: 0 0 auto;
+        width: 250px;
+        aspect-ratio: 2 / 3;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .card img {
+        width: 100%;
         height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        z-index: 2;
+      }
+
+      @media (max-width: 768px) {
+        .card {
+          width: 180px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header ul {
+          flex-direction: column;
+          gap: 12px;
+          align-items: center;
+        }
+        .card {
+          width: 150px;
+        }
       }
     </style>
   </head>
   <body>
     <header>
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Movies</a></li>
-        <li><a href="">Series</a></li>
-        <li><a href="">Shortfilm</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Movies</a></li>
+        <li><a href="#">Series</a></li>
+        <li><a href="#">Shortfilms</a></li>
       </ul>
     </header>
+
     <main>
+      <h2>Trending Now</h2>
       <div class="movies">
-        <div class="cards"></div>
-        <img src="avatar.jpg" alt="avatar" />
+        <div class="card">
+          <img
+            src="https://wallpaperbat.com/img/419932-movie-posters-wallpaper-for-the-iphone-6-plus-han-star-wars.jpg"
+            alt="Star Wars"
+          />
+        </div>
+        <div class="card">
+          <img
+            src="https://wallpaperbat.com/img/14158-avengers-endgame-marvel-cinematic-universe-marvel-comics-movie.jpg"
+            alt="Avengers Endgame"
+          />
+        </div>
+        <div class="card">
+          <img
+            src="https://wallpaperbat.com/img/48673-sonic-movie-poster-wallpaper-sonic-the-hedgehog-amino.jpg"
+            alt="Sonic"
+          />
+        </div>
+        <div class="card">
+          <img
+            src="https://wallpaperbat.com/img/245968-aladdin-movie-poster-art-4k-iphone-x-wallpaper-free-download.jpg"
+            alt="Aladdin"
+          />
+        </div>
       </div>
     </main>
   </body>

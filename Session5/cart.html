@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Basket - FreshCart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #fff4f0;
+        padding: 20px;
+        text-align: center;
+      }
+      header {
+        background: #b03a2e;
+        color: white;
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      nav a {
+        color: #fff9f8;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 10px;
+        font-size: 18px;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      #cart-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+      }
+      .cart-item {
+        background: #fff1e8;
+        border-radius: 12px;
+        width: 280px;
+        padding: 15px;
+        box-shadow: 0 4px 6px rgba(176, 58, 46, 0.3);
+      }
+      .cart-item img {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        border-radius: 8px;
+      }
+      .cart-title {
+        font-weight: bold;
+        margin: 10px 0 6px;
+      }
+      .cart-price {
+        color: #b03a2e;
+        margin-bottom: 10px;
+      }
+      .remove-btn {
+        background: #b03a2e;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .remove-btn:hover {
+        background: #ff6f61;
+      }
+      #empty-msg {
+        font-size: 22px;
+        color: #a1493e;
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Your Basket</h1>
+      <nav>
+        <a href="store.html">Back to Store</a>
+      </nav>
+    </header>
+
+    <main id="cart-items">
+      <!-- Cart items will be shown here -->
+    </main>
+
+    <script>
+      const cartSection = document.getElementById("cart-items");
+      let cart = JSON.parse(localStorage.getItem("FreshCartItems")) || [];
+
+      function renderCart() {
+        if (cart.length === 0) {
+          cartSection.innerHTML = '<p id="empty-msg">Your basket is empty.</p>';
+          return;
+        }
+        cartSection.innerHTML = "";
+        cart.forEach((item) => {
+          cartSection.innerHTML += `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.title}" />
+          <div class="cart-title">${item.title}</div>
+          <div class="cart-price">$${item.price.toFixed(2)}</div>
+          <button class="remove-btn" onclick="removeFromCart(${
+            item.id
+          })">Remove</button>
+        </div>
+      `;
+        });
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter((item) => item.id !== id);
+        localStorage.setItem("FreshCartItems", JSON.stringify(cart));
+        renderCart();
+      }
+
+      renderCart();
+    </script>
+  </body>
+</html>

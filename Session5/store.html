@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Store - Add to Cart Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #fff8f0;
+        padding: 20px;
+        text-align: center;
+      }
+      header {
+        background: #ff6f61;
+        padding: 15px;
+        color: white;
+        margin-bottom: 30px;
+      }
+      #products-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+      .product-card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        width: 220px;
+        border-radius: 10px;
+        background: #fff3e6;
+        box-shadow: 0 4px 6px rgba(255, 111, 97, 0.3);
+      }
+      .product-card img {
+        max-width: 100%;
+        height: 150px;
+        object-fit: contain;
+      }
+      .product-title {
+        font-weight: bold;
+        margin: 10px 0 6px;
+      }
+      .product-price {
+        color: #b03a2e;
+        margin-bottom: 10px;
+      }
+      button {
+        background: #b03a2e;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #ff6f61;
+      }
+      nav {
+        margin-bottom: 20px;
+      }
+      nav a {
+        color: #b03a2e;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 15px;
+        font-size: 18px;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>FreshCart Store</h1>
+      <nav>
+        <a href="store.html">Store</a> |
+        <a href="cart.html">Go to Basket</a>
+      </nav>
+    </header>
+
+    <main id="products-grid">
+      <!-- Products will load here -->
+    </main>
+
+    <script>
+      const container = document.getElementById("products-grid");
+
+      fetch("https://fakestoreapi.com/products")
+        .then((res) => res.json())
+        .then((products) => {
+          products.forEach((product) => {
+            const safeTitle = product.title.replace(/'/g, "\\'");
+            container.innerHTML += `
+          <div class="product-card">
+            <img src="${product.image}" alt="${safeTitle}" />
+            <div class="product-title">${safeTitle}</div>
+            <div class="product-price">$${product.price.toFixed(2)}</div>
+            <button onclick="addToCart(${product.id}, '${
+              product.image
+            }', '${safeTitle}', ${product.price})">Add to Basket</button>
+          </div>
+        `;
+          });
+        })
+        .catch(() => {
+          container.innerHTML = "<p>Failed to load products.</p>";
+        });
+
+      function addToCart(id, image, title, price) {
+        let cart = JSON.parse(localStorage.getItem("FreshCartItems")) || [];
+        if (!cart.some((item) => item.id === id)) {
+          cart.push({ id, image, title, price });
+          localStorage.setItem("FreshCartItems", JSON.stringify(cart));
+          alert(`Added "${title}" to your basket!`);
+        } else {
+          alert(`"${title}" is already in your basket.`);
+        }
+      }
+    </script>
+  </body>
+</html>
